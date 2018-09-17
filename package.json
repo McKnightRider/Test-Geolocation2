@@ -1,0 +1,22 @@
+{
+  "name": "revised_geolocation_app",
+  "version": "1.0.0",
+  "description": "Testing my revised geolocation app",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -c-1 -p 3000"
+  },
+  "keywords": [
+    "pwa",
+    "progressive",
+    "web",
+    "app",
+    "complete",
+    "tutorial"
+  ],
+  "author": "Simon McKnight",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}

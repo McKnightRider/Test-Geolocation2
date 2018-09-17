@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Golf Stats App</title>
+        <link rel="stylesheet" href="src/styles.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    </head>
+    
+    <body>
+        
+        <h1>Golf Stats</h1>
+        <table id="generalTable">
+            <tr>
+                <td>Date</td>
+                <td id="date"></td>
+            </tr>
+            <tr>
+                <td>Course</td>
+                <td>
+                    <select id="course" onchange="setCourse()">
+                        <option disabled selected value="nil">--select--</option>
+                        <option value="gx">Gerrards Cross</option>
+                        <option value="other">Other</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Tees</td>
+                <td>
+                    <select id="tees" onchange="setCourse()">
+                        <option disabled selected value="nil">--select--</option>
+                        <option value="white">White</option>
+                        <option value="yellow">Yellow</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Standard Scratch</td>
+                <td><input id="ss"></td>
+            </tr>
+            <tr>
+                <td>Competition</td>
+                <td><input></td>
+            </tr>
+            <tr>
+                <td>Competition Standard Scratch</td>
+                <td><input placeholder="Can fill in online when final results published"></td>
+            </tr>
+
+        </table>
+
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p></p>
+                <table id="newCourseTable">
+                    <tr><th>Course Name</th><td><input id="newCourseName"></td></tr>
+                    <tr><th>Tees</th><td><input id="newCourseTees"></td></tr>
+                    <tr><th>Standard Scratch</th><td><input id="c"></td></tr>
+                    <tr><th>Competition Standard Scratch</th><td><input></td></tr>
+                    <tr><th>Hole</th><th>Yards</th><th>Par</th></tr>  
+                    <tr><td>1</td><td><input class="a"></td><td><input class="b"></td></tr>  
+                    <tr><td>2</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>3</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>4</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>5</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>6</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>7</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>8</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>9</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>10</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>11</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>12</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>13</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>14</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>15</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>16</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>17</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><td>18</td><td><input class="a"></td><td><input class="b"></td></tr>
+                </table>
+                <!--<input type="submit" value="Submit">-->
+                <button id="newCourseStatsBtn">Finished</button>
+                <p></p>
+            </div>
+        </div>
+
+        <button id="holeBtn">Start</button>
+        <button id="distBtn" disabled>Drive</button>
+        <button id="finishRound" class="dropdown" disabled>Finish Round</button>
+        <table id="statsTable">
+            <tr>
+                <th>Hole</th>
+                <th>Yards</th>
+                <th>Par</th>
+                <th>Score</th>
+                <th>Fairway</th>
+                <th>Drive Club</th>
+                <th>Drive Dist (yds)</th>
+                <th>Green</th>
+                <th>Up and Down</th>
+                <th>Sand Save</th>
+                <th>Putts</th>
+                <th>1st Putt Dist (ft)</th>
+                <th>Strokes Gained Putting</th>
+            </tr>
+        </table>
+        <p></p>
+        <table id="distTable" alignText="center">
+            <tr>
+                <th>Location</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Accuracy (metres)</th>
+                <th>Distance (metres)</th>
+                <th>Distance (yards)</th>
+            </tr>
+        </table>
+        
+        <!-- <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDBnHvVMxnFCmWqed1H_YLIcP_RCTQhTXw",
+                authDomain: "simple-golf-app.firebaseapp.com",
+                databaseURL: "https://simple-golf-app.firebaseio.com",
+                projectId: "simple-golf-app",
+                storageBucket: "simple-golf-app.appspot.com",
+                messagingSenderId: "165864931933"
+            };
+            firebase.initializeApp(config);
+        </script> -->
+
+        <div id="mapholder"></div>
+        <script src="src/scripts.js"></script>
+        <!-- <script>
+            // Note: This example requires that you consent to location sharing when
+            // prompted by your browser. If you see the error "The Geolocation service
+            // failed.", it means you probably did not give permission for the browser to
+            // locate you.
+            var map, infoWindow;
+            function initMap() {
+              map = new google.maps.Map(document.getElementById('mapholder'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 6
+              });
+              infoWindow = new google.maps.InfoWindow;
+      
+              // Try HTML5 geolocation.
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                  var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                  };
+      
+                  infoWindow.setPosition(pos);
+                  infoWindow.setContent('Location found.');
+                  infoWindow.open(map);
+                  map.setCenter(pos);
+                }, function() {
+                  handleLocationError(true, infoWindow, map.getCenter());
+                });
+              } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+              }
+            }
+      
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+              infoWindow.setPosition(pos);
+              infoWindow.setContent(browserHasGeolocation ?
+                                    'Error: The Geolocation service failed.' :
+                                    'Error: Your browser doesn\'t support geolocation.');
+              infoWindow.open(map);
+            }
+          </script>
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbObHbrPXZ6Hyd5PoZOrHPcbQvm-fqqhM&callback=initMap">
+          </script> -->
+          <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbObHbrPXZ6Hyd5PoZOrHPcbQvm-fqqhM&callback=initMap"
+  type="text/javascript"></script> -->
+    </body>
+    
+    
+
+</html>
