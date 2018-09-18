@@ -22,23 +22,27 @@
                 <td id="date"></td>
             </tr>
             <tr>
+                <td>Date</td>
+                <td><input type="date"></td>
+            </tr>
+            <tr>
                 <td>Course</td>
-                <td>
-                    <select id="course" onchange="setCourse()">
+                <td id="coursesList" onchange="setTees()">
+                    <!-- <select id="course" onchange="setCourse()">
                         <option disabled selected value="nil">--select--</option>
                         <option value="gx">Gerrards Cross</option>
                         <option value="other">Other</option>
-                    </select>
+                    </select> -->
                 </td>
             </tr>
             <tr>
                 <td>Tees</td>
-                <td>
-                    <select id="tees" onchange="setCourse()">
+                <td id="teesList">
+                    <!-- <select id="tees" onchange="setCourse()">
                         <option disabled selected value="nil">--select--</option>
                         <option value="white">White</option>
                         <option value="yellow">Yellow</option>
-                    </select>
+                    </select> -->
                 </td>
             </tr>
             <tr>
@@ -50,8 +54,22 @@
                 <td><input></td>
             </tr>
             <tr>
+                <td>Competition Format</td>
+                <td>
+                    <select id="format" onchange="setFormat()">
+                        <option disabled selected value="nil">--select--</option>
+                        <option value="strokeplay">Strokeplay</option>
+                        <option value="stableford">Stableford</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Competition Standard Scratch</td>
                 <td><input placeholder="Can fill in online when final results published"></td>
+            </tr>
+            <tr>
+                <td>Competition Handicap</td>
+                <td><input id="handicap" type="number" placeholder="Insert round number" step="1" min="0" max="28"></td>
             </tr>
 
         </table>
@@ -66,25 +84,25 @@
                     <tr><th>Tees</th><td><input id="newCourseTees"></td></tr>
                     <tr><th>Standard Scratch</th><td><input id="c"></td></tr>
                     <tr><th>Competition Standard Scratch</th><td><input></td></tr>
-                    <tr><th>Hole</th><th>Yards</th><th>Par</th></tr>  
-                    <tr><td>1</td><td><input class="a"></td><td><input class="b"></td></tr>  
-                    <tr><td>2</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>3</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>4</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>5</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>6</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>7</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>8</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>9</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>10</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>11</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>12</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>13</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>14</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>15</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>16</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>17</td><td><input class="a"></td><td><input class="b"></td></tr>
-                    <tr><td>18</td><td><input class="a"></td><td><input class="b"></td></tr>
+                    <tr><th>Hole</th><th>Yards</th><th>Par</th><th>SI</th></tr>  
+                    <tr><td>1</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></td></tr>  
+                    <tr><td>2</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>3</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>4</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>5</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>6</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>7</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>8</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>9</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>10</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>11</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>12</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>13</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>14</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>15</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>16</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>17</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
+                    <tr><td>18</td><td><input class="a"></td><td><input class="b"></td><td><input class="d"></tr>
                 </table>
                 <!--<input type="submit" value="Submit">-->
                 <button id="newCourseStatsBtn">Finished</button>
@@ -100,7 +118,9 @@
                 <th>Hole</th>
                 <th>Yards</th>
                 <th>Par</th>
+                <th>SI</th>
                 <th>Score</th>
+                <th class="stablefordColumn">Points</th>
                 <th>Fairway</th>
                 <th>Drive Club</th>
                 <th>Drive Dist (yds)</th>

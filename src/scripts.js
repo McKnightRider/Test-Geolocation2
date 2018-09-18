@@ -153,37 +153,6 @@ holeBtn.addEventListener("click", function() {
   }
 });
 
-/* function getValue(data) {
-  document.getElementById("course").innerHTML = data.text;
-  var myDiv = document.getElementById(data.id + '-value');
-  //myDiv.innerHTML = data.value;
-  myDiv.innerHTML = "test";
-  console.log(data.value);
-} */
-
-/* function generateDropdownText(inputArray) {
-  const arr = inputArray;
-  let txt = "<select onchange=\"getValue(this)\"><option value=\"$\">--Enter--</option>";
-  for (let i = 0; i < arr.length; i++) {
-    txt += "<option value=\"val" + i + "\">" + arr[i] + "</option>";
-  }
-  txt += "</select>";
-  return txt;
-}; */
-
-//let scoreDropdownText = generateDropdownText([1, 2, 3, 4, 5, 6, 7, 8, 9, "Other"]);
-//let fairwaysDropdownText = generateDropdownText(["Yes", "Left", "Right", "Bunker", "Duffed"]);
-/* let greensDropdownText = generateDropdownText(["Yes < 10 ft", "Yes > 10 ft", "Over", "Left", "Right", "Short", "Well Off"]);
-let upanddownDropdownText = generateDropdownText(["Yes", "No"]);
-let sandDropdownText = generateDropdownText(["Yes", "No"]);
-let puttsDropdownText = generateDropdownText([1, 2, 3, 4, 5, 6, 7, 8, 9, "Other"]); */
-
-//let courseDropdownText = generateDropdownText(["Gerrards Cross", "Other"]);
-//let teesDropdownText = generateDropdownText(["White", "Yellow", "Blue", "Other"]);
-
-//document.getElementById("course").innerHTML = courseDropdownText;
-//document.getElementById("tees").innerHTML = teesDropdownText;
-
 function setDate() {
   let today = new Date();
   let dd = today.getDate();
@@ -197,59 +166,20 @@ function setDate() {
 
 setDate();
 
-//newDropdownFormat = "<div class=\"container\">"
-//newDropdownFormat += "<h2>Dropdown Example</h2>";
-//newDropdownFormat += "<p>The data-toggle=\"dropdown\" attribute is used to open the dropdown menu.</p>";
-/* newDropdownFormat += "<div class=\"dropdown\">";
-newDropdownFormat += "<button class=\"btn btn-primary dropdown-toggle\" id=\"menu1\" type=\"button\" data-toggle=\"dropdown\">Dropdown Example";
-newDropdownFormat += "<span class=\"caret\"></span></button>";
-newDropdownFormat += "<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"menu1\">";
-newDropdownFormat += "<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">HTML</a></li>";
-newDropdownFormat += "<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">CSS</a></li>";
-newDropdownFormat += "<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">JavaScript</a></li>"
-newDropdownFormat += "<li role=\"presentation\" class=\"divider\"></li>";
-newDropdownFormat += "<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">About Us</a></li>";
-newDropdownFormat += "</ul></div></div>"; */
-
-//console.log(newDropdownFormat);
-
-/* function menu() {
-  let relMenus = document.getElementsByClassName("dropdown-menu");
-  for (let i = 0; i < relMenus.length; i++) {
-    relMenus[i].addEventListener('click', myFunction, false);
-  };
-}; */
-
 function myFunction() {
   console.log("this is: " + typeof(this));
   document.getElementById("menu1").innerHTML = $(this[1]).text();
-  //$("#menu1:first-child").text($(this).text());
-  //$("#menu1:first-child").val($(this).text());
   console.log("myFunction() is running");
 };
 
-// Need to add event listeners once classes created, so moved up to holeBtn function
-//menu();
-
-/* $(function(){
-  
-  $(".dropdown-menu li a").click(function(){
-    
-    $(".btn:first-child").text($(this).text());
-     $(".btn:first-child").val($(this).text());
-  });
-
-}); */
-
 class Course {
   constructor(arr) {
-    /* this.h1 = arr[0];
-    this.h2 = arr[1];
-    this.h3 = arr[2]; */
     this.holeYards = arr[0];
     this.holePars = arr[1];
     this.ss = arr[2];
     this.name = arr[3];
+    this.holeSI = arr[4];
+    this.tees = arr[5];
   }
   calcFront9(str) {
     let sum = 0;
@@ -295,6 +225,9 @@ class Course {
   }
   getName() {
     return this.name;
+  }
+  getSI() {
+    return this.holeSI;
   }
 };
 
@@ -351,7 +284,7 @@ function getData(courseTeesArray) {
 function setCourseDetails2(dataObj) {
   console.log("Here! " + dataObj.name);
   document.getElementById("ss").value = dataObj.ss;
-  const courseObject = new Course([dataObj.holeYards, dataObj.holePars, dataObj.ss, dataObj.name]);
+  const courseObject = new Course([dataObj.holeYards, dataObj.holePars, dataObj.ss, dataObj.name, dataObj.holeSI]);
   for (let i = 0; i < dataObj.holeYards.length; i++) {
     //setCourseDetails(newCourse);
     document.getElementById(`yards${i + 1}`).innerHTML = courseObject.getYards()[i];
@@ -362,58 +295,24 @@ function setCourseDetails2(dataObj) {
     document.getElementById("parFront9").innerHTML = courseObject.calcFront9("par");
     document.getElementById("parBack9").innerHTML = courseObject.calcBack9("par");
     document.getElementById("parAll").innerHTML = courseObject.calcFront9("par") + courseObject.calcBack9("par");
+    document.getElementById(`si${i + 1}`).innerHTML = courseObject.getSI()[i]; 
   }
 }
-
-/* function setGXWhite(dataObj) {
-  console.log(dataObj.name);
-  document.getElementById("ss").value = dataObj.ss;
-  const gxWhite = new Course([dataObj.holeYards, dataObj.holePars, dataObj.ss]);
-  for (i = 0; i < dataObj.holeYards.length; i++) {
-    setCourseDetails(gxWhite);
-  }
-}
-
-function setGXYellow() {
-  document.getElementById("ss").value = gxYellowSS;
-  const gxYellow = new Course([gxYellowYards, gxYellowPars, gxYellowSS]);
-  for (i = 0; i < gxYellow.getYards().length; i++) {
-    setCourseDetails(gxYellow);
-  }
-}
-
-function setCourseDetails(courseObject) {
-  document.getElementById(`yards${i + 1}`).innerHTML = courseObject.getYards()[i]; 
-  document.getElementById("yardsFront9").innerHTML = courseObject.calcFront9("length");
-  document.getElementById("yardsBack9").innerHTML = courseObject.calcBack9("length");
-  document.getElementById("yardsAll").innerHTML = courseObject.calcFront9("length") + courseObject.calcBack9("length");
-  document.getElementById(`par${i + 1}`).innerHTML = courseObject.getPars()[i]; 
-  document.getElementById("parFront9").innerHTML = courseObject.calcFront9("par");
-  document.getElementById("parBack9").innerHTML = courseObject.calcBack9("par");
-  document.getElementById("parAll").innerHTML = courseObject.calcFront9("par") + courseObject.calcBack9("par");
-} */
 
 function setCourse() {
-  if (document.getElementById("course").value !== "nil" && document.getElementById("course") !== "other" && document.getElementById("tees").value !== "nil") {
+  /* if (document.getElementById("course").value !== "nil" && document.getElementById("course") !== "other" && document.getElementById("tees").value !== "nil") {
     let indexCourse = document.getElementById("course").selectedIndex;
     let indexTees = document.getElementById("tees").selectedIndex;
     getData([document.getElementById("course")[indexCourse].innerHTML, document.getElementById("tees")[indexTees].innerHTML]);
-  }
-  /* if (document.getElementById("course").value === "gx" && document.getElementById("tees").value === "white") {
-    getData(["Gerrards Cross", "White"]);
-    //setGXWhite();
-  }
-  if (document.getElementById("course").value === "gx" && document.getElementById("tees").value === "yellow") {
-    setGXYellow();
   } */
+
   if (document.getElementById("course").value === "other") {
-    //askNewCourseDetails();
     modal.style.display = "block";
   }
 };
 
-let scoreDropdownFront9 = `<select class="scores scoresFront9" onchange="sumScoresPutts('scores')">
-                  <option disabled selected value>--select--</option>
+let scoreDropdownFront9 = `<select class="scores scoresFront9" onchange="sumScoresPutts('scores'); calcStableford();">
+                  <option disabled selected value=0>--select--</option>
                   <option value=1>1</option>
                   <option value=2>2</option>
                   <option value=3>3</option>
@@ -427,8 +326,8 @@ let scoreDropdownFront9 = `<select class="scores scoresFront9" onchange="sumScor
                   <option value=0>-</option>
                 </select>`;
 
-let scoreDropdownBack9 = `<select class="scores scoresBack9" onchange="sumScoresPutts('scores')">
-                  <option disabled selected value>--select--</option>
+let scoreDropdownBack9 = `<select class="scores scoresBack9" onchange="sumScoresPutts('scores'); calcStableford();">
+                  <option disabled selected value=0>--select--</option>
                   <option value=1>1</option>
                   <option value=2>2</option>
                   <option value=3>3</option>
@@ -449,7 +348,21 @@ let sumScoresPutts = function(stat) {
   let sumFront9 = 0;
   let sumBack9 = 0;
 
-  if (stat !== "strokesGained") {
+  if (stat === "stableford") {
+    let front9Scores = document.getElementsByClassName(statFront9);
+    for (let i = 0; i < front9Scores.length; i++) {
+      if (Number.isInteger(parseInt(front9Scores[i].innerHTML))) {
+        sumFront9 += parseInt(front9Scores[i].innerHTML);
+      }
+    }
+
+    let back9Scores = document.getElementsByClassName(statBack9);
+    for (let i = 0; i < back9Scores.length; i++) {
+      if (Number.isInteger(parseInt(back9Scores[i].innerHTML))) {
+        sumBack9 += parseInt(back9Scores[i].innerHTML);
+      }
+    }
+  } else if (stat !== "strokesGained") {
     let front9Scores = document.getElementsByClassName(statFront9);
     for (let i = 0; i < front9Scores.length; i++) {
       if (Number.isInteger(parseInt(front9Scores[i].value))) {
@@ -507,38 +420,6 @@ let fairwaysDropdownBack9 =  `<select class="fairways fairwaysBack9" onchange="s
                                 <option value="other">Other</option>
                                 <option value="nil">-</option>
                               </select>`;
-
-/* let sumFairways = function() {
-  let hitFront9 = 0;
-  let allFront9 = 0;
-  let hitBack9 = 0;
-  let allBack9 = 0;
-  let sumTotal = 0;
-
-  let front9Fairways = document.getElementsByClassName("fairwaysFront9");
-  for (let i = 0; i < front9Fairways.length; i++) {
-    if (front9Fairways[i].value === "yes") {
-      hitFront9++;
-      allFront9++;
-    } else if (front9Fairways[i].value !== "nil") {
-      allFront9++;
-    }
-  }
-
-  let back9Fairways = document.getElementsByClassName("fairwaysBack9");
-  for (let i = 0; i < back9Fairways.length; i++) {
-    if (back9Fairways[i].value === "yes") {
-      hitBack9++;
-      allBack9++;
-    } else if (back9Fairways[i].value !== "nil") {
-      allBack9++;
-    }
-  }
-
-  document.getElementById("fairwaysFront9").innerHTML = `${hitFront9} of ${allFront9}`;
-  document.getElementById("fairwaysBack9").innerHTML = `${hitBack9} of ${allBack9}`;
-  document.getElementById("fairwaysAll").innerHTML = `${hitFront9 + hitBack9} of ${allFront9 + allBack9}`;
-} */
 
 const sumStats = function(stat) {
   let statFront9 = stat + "Front9";
@@ -731,8 +612,10 @@ function setTable() {
     if (i < 9) {
       statsTable.lastChild.innerHTML = `<td>${i + 1}</td>
                                         <td id="yards${i + 1}"></td>
-                                        <td id="par${i+1}"></td>
-                                        <td>${scoreDropdownFront9}</td>
+                                        <td id="par${i + 1}"></td>
+                                        <td id="si${i + 1}"></td>
+                                        <td id="score${i + 1}">${scoreDropdownFront9}</td>
+                                        <td id="stableford${i + 1}" class="stableford stablefordFront9 stablefordColumn"></td>
                                         <td>${fairwaysDropdownFront9}</td>
                                         <td>${driveClubDropdownFront9}</td>
                                         <td id="drive${i + 1}" class="driveDists"></td>
@@ -746,7 +629,9 @@ function setTable() {
       statsTable.lastChild.innerHTML = `<td>${i + 1}</td>
                                         <td id="yards${i + 1}"></td>
                                         <td id="par${i + 1}"></td>
-                                        <td>${scoreDropdownBack9}</td>
+                                        <td id="si${i + 1}"></td>
+                                        <td id="score${i + 1}">${scoreDropdownBack9}</td>
+                                        <td id="stableford${i + 1}" class="stableford stablefordBack9 stablefordColumn"></td>
                                         <td>${fairwaysDropdownBack9}</td>
                                         <td>${driveClubDropdownBack9}</td>
                                         <td id="drive${i + 1}" class="driveDists"></td>
@@ -763,7 +648,9 @@ function setTable() {
       statsTable.lastChild.innerHTML = `<td>Front 9</td>
                                         <td id="yardsFront9"></td>
                                         <td id="parFront9"></td>
+                                        <td></td>
                                         <td id="scoresFront9">0</td>
+                                        <td id="stablefordFront9" class="stablefordColumn">0</td>
                                         <td id="fairwaysFront9">0 of 0</td>
                                         <td></td>
                                         <td id="aveDriverDistFront9"></td>
@@ -780,7 +667,9 @@ function setTable() {
       statsTable.lastChild.innerHTML = `<td>Back 9</td>
                                         <td id="yardsBack9"></td>
                                         <td id="parBack9"></td>
+                                        <td></td>
                                         <td id="scoresBack9">0</td>
+                                        <td id="stablefordBack9" class="stablefordColumn">0</td>
                                         <td id="fairwaysBack9">0 of 0</td>
                                         <td></td>
                                         <td id="aveDriverDistBack9"></td>
@@ -795,7 +684,9 @@ function setTable() {
       statsTable.lastChild.innerHTML = `<td>Total</td>
                                         <td id="yardsAll"></td>
                                         <td id="parAll"></td>
+                                        <td></td>
                                         <td id="scoresAll">0</td>
+                                        <td id="stablefordAll" class="stablefordColumn">0</td>
                                         <td id="fairwaysAll">0 of 0</td>
                                         <td></td>
                                         <td id="aveDriverDistAll"></td>
@@ -855,7 +746,12 @@ function calcStrokesGained(dist, hole) {
 finishBtn.addEventListener("click", function() {
   //alert("This button doesn't do anything yet.  It will send data to database in due course.");
   let statsObject = {
+    date: {},
+    course: {},
+    tees:  {},
+    css: {},
     scores: {},
+    stableford: {},
     fairways: [],
     driveClub: [],
     driveDist: [],
@@ -869,7 +765,16 @@ finishBtn.addEventListener("click", function() {
 
   // For numerical inputs - currently scores, to add putts, puttsDist and strokesGained later
   let x = document.getElementsByClassName("scores");
+  let w = document.getElementsByClassName("stableford");
   let checkNull = true;
+
+  // Set basic stats
+  statsObject.date = document.getElementById("date").innerHTML;
+  let indexCourse = document.getElementById("course").selectedIndex;
+  let indexTees = document.getElementById("tees").selectedIndex;
+  statsObject.course = document.getElementById("course")[indexCourse].innerHTML;
+  statsObject.tees = document.getElementById("tees")[indexTees].innerHTML;
+
   for (let i = 0; i < x.length; i++) {
     if (Number.isInteger(parseInt(x[i].value))) {
       statsObject.scores[i] = parseInt(x[i].value);
@@ -877,6 +782,15 @@ finishBtn.addEventListener("click", function() {
     } else {
       statsObject.scores[i] = "-";
       checkNull = false;
+    }
+  }
+
+  for (let i = 0; i < w.length; i++) {
+    if (Number.isInteger(parseInt(w[i].innerHTML))) {
+      statsObject.stableford[i] = parseInt(w[i].innerHTML);
+      //statsObject.scores.push(parseInt(x[i].value));
+    } else {
+      statsObject.stableford[i] = "-";
     }
   }
 
@@ -951,16 +865,20 @@ document.getElementById("newCourseStatsBtn").addEventListener("click", function(
   let newYards = document.getElementsByClassName("a");
   let newPars = document.getElementsByClassName("b");
   let newCourseSS = document.getElementById("c").value;
+  let newSI = document.getElementsByClassName("d");
   let newCourseYards = [];
   let newCoursePars = [];
+  let newCourseSI = [];
 
   for (i = 0; i < newYards.length; i += 1) {
     newCourseYards.push(parseInt(newYards[i].value));
     newCoursePars.push(parseInt(newPars[i].value));
+    newCourseSI.push(parseInt(newSI[i].value));
   };
   console.log("newCourseYards is: " + newCourseYards);
   console.log("newCoursePars is: " + newCoursePars);
-  var newCourse = new Course([newCourseYards, newCoursePars, newCourseSS, newCourseName]);
+  console.log("newCourseSI is: " + newCourseSI);
+  var newCourse = new Course([newCourseYards, newCoursePars, newCourseSS, newCourseName, newCourseSI, newCourseTees]);
   console.log("The new course is " + newCourse);
   let opt = document.createElement("option");
   opt.setAttribute("id", "nc");
@@ -1198,8 +1116,8 @@ navigator.geolocation.getAccurateCurrentPosition = function (success, error, geo
       document.getElementById("mapholder").innerHTML = '<p>Locating in progress</p>';
     }
 
-    if (!options.maxWait)            options.maxWait = 100000; // Default 10 seconds
-    if (!options.desiredAccuracy)    options.desiredAccuracy = 5; // Default 20 meters
+    if (!options.maxWait)            options.maxWait = 10000; // Default 10 seconds
+    if (!options.desiredAccuracy)    options.desiredAccuracy = 10; // Default 20 meters
     if (!options.timeout)            options.timeout = options.maxWait; // Default to maxWait
 
     options.maximumAge = 0; // Force current locations only
@@ -1208,3 +1126,144 @@ navigator.geolocation.getAccurateCurrentPosition = function (success, error, geo
     watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
     timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
 };
+
+function setFormat() {
+  let formatBtn = document.getElementById("format");
+  let pointsColumn = document.getElementsByClassName("stablefordColumn");
+  if (formatBtn.value === "strokeplay") {
+    for (let i = 0; i < pointsColumn.length; i += 1) {
+      pointsColumn[i].style.display = "none";
+    }
+  } else if (formatBtn.value === "stableford") {
+    for (let i = 0; i < pointsColumn.length; i += 1) {
+      pointsColumn[i].style.display = "table-cell";
+    }
+  }
+}
+
+function calcStableford() {
+  console.log("???");
+  let handicap = document.getElementById("handicap").value;
+  let shots = 0; // Handicap shots per hole
+  let holeSI = 0;
+  let holePar = 0;
+  let holeGrossScore = 0;
+  let holeNetScore = 0;
+  console.log("Handicap is " + handicap);
+
+  // Assuming scratch or worse handicap
+  for (let i = 0; i < 18; i += 1) { 
+    holeSI = parseInt(document.getElementById(`si${i + 1}`).innerHTML);
+    if (handicap <= 18) {
+      if (holeSI <= handicap) {
+        shots = 1;
+      } else {
+        shots = 0;
+      }
+    } else if (handicap > 18 && handicap <= 36) {
+      if (holeSI <= handicap - 18) {
+        shots = 2;
+      } else {
+        shots = 1;
+      }
+    };
+    /* if (handicap <= 18 && holeSI <= handicap) {
+      shots = 1;
+    } else if (handicap <= 18 && holeSI > handicap) {
+      shots = 0;
+    } */
+    holePar = parseInt(document.getElementById(`par${i + 1}`).innerHTML);
+    holeGrossScore = parseInt(document.getElementById(`score${i + 1}`).firstChild.value);
+    if (holeGrossScore !== 0) {
+      holeNetScore = holeGrossScore - shots;
+      document.getElementById(`stableford${i + 1}`).innerHTML = Math.max(2 + holePar - holeNetScore, 0);
+    }
+  }
+  sumScoresPutts("stableford");
+}
+
+function setCourseDropdown() {
+  let coursesCell = document.getElementById("coursesList");
+  const url = "https://simple-golf-app.firebaseio.com/courses.json"; 
+  let networkDataReceived = false;
+  let coursesSet = new Set(); // Avoiding duplicate names
+  let coursesList = []; // For list of courses in database - cannot sort() set so do so with array
+  let coursesCellString = ""
+
+  fetch(url)
+  .then(function(res) {
+    return res.json();
+  })
+  .then(function(data) {
+    networkDataReceived = true;
+    console.log('From web', data);
+    //let setKey = "";
+    for (let key in data) {
+      console.log("key name: " + data[key].name + ", data: " + data[key]);
+      coursesSet.add(data[key].name);
+      coursesList = Array.from(coursesSet).sort();
+      //coursesList.sort();
+      //console.log("Seeing if key name prints: " + dataObj[key].name);
+      /* if (data[key].name === courseTeesArray[0] && data[key].tees === courseTeesArray[1]) {
+        setKey = key;
+        console.log("setKey is: " + setKey);
+      } */
+    }
+    //coursesList = 
+    coursesCellString = `<select id="course" onchange="setCourse()">
+                          <option disabled selected value="nil">--select--</option>`;
+    for (let i = 0; i < coursesList.length; i += 1) {
+      coursesCellString += `<option>${coursesList[i]}</option>`;
+    }
+    coursesCellString += `<option value="other">Other</option>
+                          </select>`;
+    /* coursesCell.innerHTML = `<select id="course" onchange="setCourse()">
+                                <option disabled selected value="nil">--select--</option>
+                                <option value="gx">Gerrards Cross</option>
+                                <option value="other">Other</option>
+                            </select>`; */
+    coursesCell.innerHTML = coursesCellString;
+
+  });
+}
+
+setCourseDropdown();
+
+function setTees() {
+  let teesCell = document.getElementById("teesList");
+  let selectedCourseIndex = document.getElementById("course").selectedIndex;
+  let selectedCourse = document.getElementById("course")[selectedCourseIndex].innerHTML;
+  console.log("The selected course is " + selectedCourse);
+
+  // I am calling the data too often, should combine with setCourseDropdown() function;
+  const url = "https://simple-golf-app.firebaseio.com/courses.json"; 
+  let networkDataReceived = false;
+  let teesList = [];
+  let teesCellString = "";
+
+  fetch(url)
+  .then(function(res) {
+    return res.json();
+  })
+  .then(function(data) {
+    networkDataReceived = true;
+    console.log('From web', data);
+    //let setKey = "";
+    for (let key in data) {
+      console.log("key name: " + data[key].name + ", tees: " + data[key].tees);
+      if (data[key].name === selectedCourse) {
+        teesList.push(data[key].tees);
+      }
+      teesList.sort();
+    }
+    
+    teesCellString = `<select id="tees" onchange="setCourse()">
+                          <option disabled selected value="nil">--select--</option>`;
+    for (let i = 0; i < teesList.length; i += 1) {
+      teesCellString += `<option>${teesList[i]}</option>`;
+    }
+    teesCellString += `<option value="other">Other</option>
+                          </select>`;
+    teesCell.innerHTML = teesCellString;
+  })
+}

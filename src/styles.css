@@ -99,3 +99,7 @@ th, td {
     display: block;
     width: 100%;
 } */
+
+.stableford {
+    display: none;
+}
