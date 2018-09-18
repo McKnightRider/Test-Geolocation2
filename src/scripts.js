@@ -749,6 +749,8 @@ finishBtn.addEventListener("click", function() {
     date: {},
     course: {},
     tees:  {},
+    competition: {},
+    format: {},
     css: {},
     handicap: {},
     scores: {},
@@ -777,6 +779,10 @@ finishBtn.addEventListener("click", function() {
   statsObject.course = document.getElementById("course")[indexCourse].innerHTML;
   statsObject.tees = document.getElementById("tees")[indexTees].innerHTML;
   statsObject.handicap = document.getElementById("handicap").value;
+  statsObject.competition = document.getElementById("competition").value;
+  let indexFormat = document.getElementById("format").selectedIndex;
+  statsObject.format = document.getElementById("format")[indexFormat].innerHTML;
+  statsObject.css = document.getElementById("css").value;
 
   for (let i = 0; i < x.length; i++) {
     if (Number.isInteger(parseInt(x[i].value))) {
