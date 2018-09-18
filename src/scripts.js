@@ -153,7 +153,7 @@ holeBtn.addEventListener("click", function() {
   }
 });
 
-function setDate() {
+/* function setDate() {
   let today = new Date();
   let dd = today.getDate();
   let mm = today.getMonth(); //January is 0
@@ -162,9 +162,9 @@ function setDate() {
 
   today = dd + ' ' + months[mm] + ' ' + yyyy;
   document.getElementById("date").innerHTML = today;
-};
+}; 
 
-setDate();
+setDate();*/
 
 function myFunction() {
   console.log("this is: " + typeof(this));
@@ -180,6 +180,8 @@ class Course {
     this.name = arr[3];
     this.holeSI = arr[4];
     this.tees = arr[5];
+    this.date = arr[6];
+    this.handicap = arr[7];
   }
   calcFront9(str) {
     let sum = 0;
@@ -284,7 +286,7 @@ function getData(courseTeesArray) {
 function setCourseDetails2(dataObj) {
   console.log("Here! " + dataObj.name);
   document.getElementById("ss").value = dataObj.ss;
-  const courseObject = new Course([dataObj.holeYards, dataObj.holePars, dataObj.ss, dataObj.name, dataObj.holeSI]);
+  const courseObject = new Course([dataObj.holeYards, dataObj.holePars, dataObj.ss, dataObj.name, dataObj.holeSI, dataObj.date, dataObj.handicap]);
   for (let i = 0; i < dataObj.holeYards.length; i++) {
     //setCourseDetails(newCourse);
     document.getElementById(`yards${i + 1}`).innerHTML = courseObject.getYards()[i];
@@ -300,14 +302,12 @@ function setCourseDetails2(dataObj) {
 }
 
 function setCourse() {
-  /* if (document.getElementById("course").value !== "nil" && document.getElementById("course") !== "other" && document.getElementById("tees").value !== "nil") {
+  if (document.getElementById("course").value === "other") {
+    modal.style.display = "block";
+  } else if (document.getElementById("course").value !== "nil" && document.getElementById("course") !== "other" && document.getElementById("tees").value !== "nil") {
     let indexCourse = document.getElementById("course").selectedIndex;
     let indexTees = document.getElementById("tees").selectedIndex;
     getData([document.getElementById("course")[indexCourse].innerHTML, document.getElementById("tees")[indexTees].innerHTML]);
-  } */
-
-  if (document.getElementById("course").value === "other") {
-    modal.style.display = "block";
   }
 };
 
@@ -750,6 +750,7 @@ finishBtn.addEventListener("click", function() {
     course: {},
     tees:  {},
     css: {},
+    handicap: {},
     scores: {},
     stableford: {},
     fairways: [],
@@ -769,11 +770,13 @@ finishBtn.addEventListener("click", function() {
   let checkNull = true;
 
   // Set basic stats
-  statsObject.date = document.getElementById("date").innerHTML;
+  //statsObject.date = document.getElementById("date").innerHTML;
+  statsObject.date = document.getElementById("date2").value;
   let indexCourse = document.getElementById("course").selectedIndex;
   let indexTees = document.getElementById("tees").selectedIndex;
   statsObject.course = document.getElementById("course")[indexCourse].innerHTML;
   statsObject.tees = document.getElementById("tees")[indexTees].innerHTML;
+  statsObject.handicap = document.getElementById("handicap").value;
 
   for (let i = 0; i < x.length; i++) {
     if (Number.isInteger(parseInt(x[i].value))) {

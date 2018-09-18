@@ -17,13 +17,14 @@
         
         <h1>Golf Stats</h1>
         <table id="generalTable">
-            <tr>
+            <!-- <tr>
                 <td>Date</td>
                 <td id="date"></td>
-            </tr>
+            </tr> -->
             <tr>
                 <td>Date</td>
-                <td><input type="date"></td>
+                <!-- Can't seem to set pattern to display in dd-mmm-yyyy format-->
+                <td><input type="date" id="date2" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:30))|(?:(?:0[13578]|1[02])-31))"></td>
             </tr>
             <tr>
                 <td>Course</td>
