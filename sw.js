@@ -2,11 +2,11 @@ var CACHE_STATIC_NAME = 'static-v2';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
   '/',
-  '/index.html',
-  '/offline.html',
-  '/src/app.js',
-  '/src/scripts.js',
-  '/src/styles.css'
+  'index.html',
+  'offline.html',
+  'src/app.js',
+  'src/scripts.js',
+  'src/styles.css'
 ];
 
 self.addEventListener('install', function (event) {
